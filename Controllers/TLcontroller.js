@@ -86,32 +86,50 @@ const getAllEmployees = async (req, res) => {
 const MyEmployees = async (req, res) => {
   const { id } = req.params;
 
-  try {
-    const singleEmp = await EmployeeModel.findOne({
-      _id: id,
+  // try {
+  //   const singleEmp = await EmployeeModel.findOne({
+  //     _id: id,
 
+  //     createdBy: req.user.id,
+  //   });
+
+  //   if (!singleEmp) {
+  //     return res.status(404).json({
+  //       success: false,
+
+  //       message: "Employee not found",
+  //     });
+  //   }
+
+  //   return res.status(200).json({
+  //     success: true,
+
+  //     message: "My Employee Fetched Successfully",
+
+  //     singleEmp,
+  //   });
+  // } catch (err) {
+  //   return res.status(500).json({
+  //     success: false,
+  //     message: "Unable to Load the My Employee",
+  //   });
+  // }
+
+  try {
+    const employees = await EmployeeModel.find({
       createdBy: req.user.id,
     });
-
-    if (!singleEmp) {
-      return res.status(404).json({
-        success: false,
-
-        message: "Employee not found",
-      });
-    }
 
     return res.status(200).json({
       success: true,
 
-      message: "My Employee Fetched Successfully",
-
-      singleEmp,
+      employees,
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
-      message: "Unable to Load the My Employee",
+
+      message: "Unable to Load Employees",
     });
   }
 };
@@ -122,7 +140,12 @@ const searchEmployee = async (req, res) => {
   try {
     const employees = await EmployeeModel.find({
       createdBy: req.user.id,
-      name: name,
+
+      name: {
+        $regex: name,
+
+        $options: "i",
+      },
     });
 
     if (employees.length === 0) {
@@ -135,7 +158,9 @@ const searchEmployee = async (req, res) => {
 
     return res.status(200).json({
       success: true,
+
       message: "Employees Fetched Successfully",
+
       employees,
     });
   } catch (err) {
