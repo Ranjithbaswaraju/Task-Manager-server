@@ -9,7 +9,7 @@ const app = express();
 const port = 3000;
 // CORS
 app.use(cors({
-    origin: ["https://task-manager-client-kohl.vercel.app","http://localhost:5173"]
+    origin: ["https://task-manager-client-kohl.vercel.app","https://task-manager-client-gmcdtnone-ranjithbaswarajus-projects.vercel.app","http://localhost:5173"]
 }));
 // Middleware
 app.use(express.json());
