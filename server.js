@@ -9,8 +9,7 @@ const app = express();
 const port = 3000;
 // CORS — allow Vercel deployments + any local Vite dev port (5173, 5174, etc.)
 const allowedOrigins = [
-    "https://task-manager-client-kohl.vercel.app",
-    "https://task-manager-client-gmcdtnone-ranjithbaswarajus-projects.vercel.app",
+    "https://task-manager-client-mlrz.vercel.app",
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:5175",
